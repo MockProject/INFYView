@@ -1,0 +1,35 @@
+		.node circle {
+    		cursor: pointer;
+    		stroke: #3182bd;
+    		stroke-width: 1.5px;
+		}
+		.node text {
+    		font: 10px sans-serif;
+    		pointer-events: none;
+    		text-anchor: middle;
+		}
+		line.link {
+    		fill: none;
+    		stroke: #9ecae1;
+    		stroke-width: 1.5px;
+		}
+		.bs-example{
+    		margin: 1%;
+    	}
+    
+    	.btn-xl {
+
+   			padding: 30px 30px;
+    		font-size: 15px;
+    		font-weight: bold;
+    		border-radius: 8px;
+    		white-space:normal;
+    		word-wrap: break-word;
+		}
+		
+		* {margin: 0; padding: 0;}
+		#wrapper_div {height: 100%; width:100%; font-size: 0;}
+		#left, #right {display: inline-block; *display: inline; zoom: 1; vertical-align: top; font-size: 12px;}
+		#left {float:left; width: 50%; background: red;}
+		/* #middle {float:left; width: 33%; background: green;} */
+		#right {float:right; width: 50%; background: white;}
