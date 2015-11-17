@@ -19,6 +19,7 @@
         <link rel="stylesheet" href="<c:url value="/resource_bundle/css/reset.css"/>">
         <link rel="stylesheet" href="<c:url value="/resource_bundle/css/supersized.css"/>">
         <link rel="stylesheet" href="<c:url value="/resource_bundle/css/loginstyle.css"/>">
+        <link rel="stylesheet" href="<c:url value="/resource_bundle/css/global_message_style.css"/>">
 
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
@@ -31,12 +32,21 @@
 
         <div class="page-container">
             <h1>INFYView</h1>
-            <form:form action="login" method="post">
-                <form:input type="text" path="username" class="username" placeholder="Username"/>
-                <form:input type="password" path="password" class="password" placeholder="Password"/>
-                <button type="submit">Login</button>
-                <div class="error"><span>${errmessage}</span></div>
+            <form:form action="login" method="post" class="form_style">
+                <form:input type="text" path="username" class="username form_input_style" placeholder="Username"/>
+                <form:input type="password" path="password" class="password form_input_style" placeholder="Password"/>
+                <button type="submit">Login</button> 
             </form:form>
+            
+            <c:if test="${not empty errmessage}">
+            	<div class="my-notify-error">${errmessage}</div>
+            </c:if>
+            <c:if test="${not empty successmessage}">
+            	<div class="my-notify-success">${successmessage}</div>
+            </c:if>
+            <c:if test="${not empty infomessage}">
+            	<div class="my-notify-info">${infomessage}</div>
+            </c:if>
             <div class="connect">
                 <p>or connect with:</p>
                 <p>

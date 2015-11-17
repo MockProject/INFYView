@@ -1,7 +1,7 @@
 
 jQuery(document).ready(function() {
 
-    $('.page-container form').submit(function(){
+    $('.page-container form:form').submit(function(){
         var username = $(this).find('.username').val();
         var password = $(this).find('.password').val();
         if(username == '') {
@@ -24,7 +24,7 @@ jQuery(document).ready(function() {
         }
     });
 
-    $('.page-container form .username, .page-container form .password').keyup(function(){
+    $('.page-container form:form .username, .page-container form:form .password').keyup(function(){
         $(this).parent().find('.error').fadeOut('fast');
     });
 

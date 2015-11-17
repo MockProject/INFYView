@@ -27,12 +27,12 @@ import com.mock.infyview.util.SessionObjectsInterface;
 public class LoginController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public ModelAndView getLoginForm(HttpServletRequest req, HttpServletResponse res){
+	public String getLoginForm(HttpServletRequest req, HttpServletResponse res, Model model){
 		
-		//model.addAttribute("message", null);
-		//model.addAttribute("command", new LoginForm());
-		//return "login";
-		return new ModelAndView("login","command",new LoginForm());	
+		//model.addAttribute("errmessage", "Bad credentials!");
+		model.addAttribute("command", new LoginForm());
+		return "login";
+		//return new ModelAndView("login","command",new LoginForm());	
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -42,7 +42,9 @@ public class LoginController {
 		form = LoginValidation.validateLogin(form);
 		
 		if(form==null){
-			return "redirect:" + "/login";
+			model.addAttribute("errmessage", "Bad credentials!");
+			//return "redirect:" + "/login";
+			return getLoginForm(req, res, model);
 		}
 		else{
 			//Creating userObj to persist in session
@@ -58,5 +60,14 @@ public class LoginController {
 		
 	}
 	
-	
+	@RequestMapping(value="/logout")
+	public String logout(HttpServletRequest req, HttpServletResponse res, Model model){
+		
+		//model.addAttribute("errmessage", "Bad credentials!");
+		
+		model.addAttribute("successmessage", "Logged out Successfully!");
+		model.addAttribute("infomessage", "Please login again to continue!");
+		return getLoginForm(req, res, model);
+		//return new ModelAndView("login","command",new LoginForm());	
+	}
 }

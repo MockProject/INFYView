@@ -47,7 +47,7 @@
 				</ul>
 				<!--Right Align Logout-->
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Logout</a></li>
+					<li><a href="logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
