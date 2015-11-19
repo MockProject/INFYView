@@ -18,14 +18,14 @@
 	</http>
 		    <!-- login-processing-url="/postlogin" -->
 	<authentication-manager>
-	  <authentication-provider>
+<!-- 	  <authentication-provider>
 	    <user-service>
 		<user name="CEO" password="Infosys1" authorities="ROLE_CEO" />
 		<user name="DM" password="Infosys2" authorities="ROLE_DM" />
 		<user name="UnitHead" password="Infosys3" authorities="ROLE_UnitHead" />
 	    </user-service>
-	  </authentication-provider>
-	  <!-- <authentication-provider user-service-ref="authenticationService"></authentication-provider> -->
+	  </authentication-provider> -->
+	  <authentication-provider user-service-ref="authenticationService"></authentication-provider>
 	</authentication-manager>
 
 </beans:beans>

@@ -20,7 +20,7 @@
        http://www.springframework.org/schema/security/spring-security.xsd
         -->
 
-	<context:component-scan base-package="com.mock.infyview.controller" />
+	<context:component-scan base-package="com.mock.infyview.controller,com.mock.infyview.util" />
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/jsp/" />
@@ -28,37 +28,4 @@
 	</bean>
 	<mvc:resources mapping="/resource_bundle/**" location="/resource_bundle/" cache-period="31556926"/>
 	<mvc:annotation-driven />
-	<!-- Spring Security bean -->
-	<!-- <security:http auto-config="true" use-expressions="true">
-    	Interceptor urls
-    	<security:intercept-url pattern="/login**" access="permitAll" />
-    	<security:intercept-url pattern="/resource_bundle/**" access="permitAll" />
-    	<security:intercept-url pattern="/**" access="permitAll" />
-    	<security:intercept-url pattern="/**" access="hasRole('USER')" />
-    	<security:intercept-url pattern="/admin**" access="hasRole('ADMIN')" />
-    
-    	Login Form
-    	<security:form-login 
-        	login-page="/login"
-        	default-target-url="/dashboard"
-        	authentication-failure-url="/login?error=1" 
-        	username-parameter="username"
-        	password-parameter="password" />
-         
-    Logout
-    <security:logout logout-success-url="/logout" />
-
-            
-    Logout
-    <security:logout logout-success-url="/logout" />
-	</security:http>
-	<security:authentication-manager>
-      <security:authentication-provider>
-        <security:user-service>
-            <security:user name="stitis" password="mindfire" authorities="USER" />
-            <security:user name="ram" password="pass1234" authorities="ADMIN" />
-        </security:user-service>
-      </security:authentication-provider>
-	</security:authentication-manager>
-	 -->
 </beans>

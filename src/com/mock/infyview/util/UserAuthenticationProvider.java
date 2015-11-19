@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -55,7 +56,7 @@ public class UserAuthenticationProvider implements UserDetailsService{
 		Set<AppUserRole> appUserRoles3 = new HashSet<AppUserRole>();
 		AppUserRole role3 = new AppUserRole(u3, "ROLE_UnitHead"); 
 		appUserRoles3.add(role3);
-		u1.setUserRole(appUserRoles3);
+		u3.setUserRole(appUserRoles3);
 		appUsers.add(u3);
 		
 		//appUsers.add(new AppUser("CEO", "Infosys1", true));
