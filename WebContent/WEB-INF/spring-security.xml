@@ -7,7 +7,7 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<http auto-config="true">
-		<intercept-url pattern="/dashboard**" access="ROLE_DM" />
+		<intercept-url pattern="/dashboard**" access="ROLE_CEO,ROLE_DM,ROLE_UnitHead" />
 		<form-login 
 		    login-page="/login" 
 		    default-target-url="/dashboard" 
@@ -25,6 +25,7 @@
 		<user name="UnitHead" password="Infosys3" authorities="ROLE_UnitHead" />
 	    </user-service>
 	  </authentication-provider>
+	  <!-- <authentication-provider user-service-ref="authenticationService"></authentication-provider> -->
 	</authentication-manager>
 
 </beans:beans>

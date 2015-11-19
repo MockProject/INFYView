@@ -4,12 +4,17 @@
 package com.mock.infyview.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.util.RedirectUrlBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,28 +39,41 @@ public class DashboardController {
     String roxieInput4="";
     String roxieInput5="";
     
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
 	public ModelAndView getDashboard(HttpServletRequest req, HttpServletResponse res){
 		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String loggedInUserName = auth.getName();
+		String name = null;
+        Set<GrantedAuthority> role = new HashSet<GrantedAuthority>();
+
+        //check if user is login
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            // Get the user details
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            name = userDetail.getUsername();
+            role = (Set<GrantedAuthority>) userDetail.getAuthorities();
+        }
+
+        // set the model attributes
+        //model.addAttribute("accountname", name);
+        //model.addAttribute("userRole", role);
+
 		
-		if(loggedInUserName.equalsIgnoreCase("DM") 
-				|| loggedInUserName.equalsIgnoreCase("UnitHead")){
-			return new ModelAndView("redirect:" + "/settings");
-		}
+		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInUserRole = auth.getName();
 		
 		UserObject uo = SessionObjectsInterface.getFromSession(req, res);
-		//Coming from pring security authentication
+		//Coming from spring security authentication
 		if (uo==null){
 			uo = new UserObject();
-			uo.setAcesslevel(loggedInUserName);
+			uo.setAcesslevel(loggedInUserRole);
 			SessionObjectsInterface.saveToSession(req, res, uo);
 		}
 		//redirecting to settings page in case of DM/UnitHead has logged in
 		if (uo.getAcesslevel().equalsIgnoreCase("DM") || uo.getAcesslevel().equalsIgnoreCase("UnitHead")){
 			if(uo.getSelectedDCValue()==null || uo.getSelectedDUValue()==null || uo.getSelectedUnitDetails()==null){
-				return new ModelAndView("settings");
+				return new ModelAndView("redirect:" + "/settings");
 			}
 			//Otherwise if DM/UnitHead is coming from settings page, then flow will continue
 		}
