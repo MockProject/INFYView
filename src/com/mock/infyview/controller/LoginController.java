@@ -3,20 +3,13 @@
  */
 package com.mock.infyview.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mock.infyview.model.LoginForm;
-import com.mock.infyview.model.UserObject;
-import com.mock.infyview.util.LoginValidation;
-import com.mock.infyview.util.SessionObjectsInterface;
 
 
 /**
@@ -26,7 +19,34 @@ import com.mock.infyview.util.SessionObjectsInterface;
 @Controller
 public class LoginController {
 	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String rootController(){
+		return "redirect:" + "/dashboard";
+	}
+	
+	//Spring Security see this :
+			@RequestMapping(value = "/login", method = RequestMethod.GET)
+			public ModelAndView getLoginForm(
+				@RequestParam(value = "error", required = false) String error,
+				@RequestParam(value = "logout", required = false) String logout) {
+
+				ModelAndView model = new ModelAndView();
+				if (error != null) {
+					model.addObject("errmessage", "Invalid username and password!");
+				}
+
+				if (logout != null) {
+					model.addObject("successmessage", "You've been logged out successfully.");
+					model.addObject("infomessage", "Please login again to continue");
+				}
+				model.addObject("command", new LoginForm());
+				model.setViewName("login");
+				
+				return model;
+			}
+			
+	
+	/*@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String getLoginForm(HttpServletRequest req, HttpServletResponse res, Model model){
 		
 		//model.addAttribute("errmessage", "Bad credentials!");
@@ -52,8 +72,8 @@ public class LoginController {
 			uo.setAcesslevel(form.getUsername());
 			SessionObjectsInterface.saveToSession(req, res, uo);
 		
-			/*if(form.getUsername().equalsIgnoreCase("CEO")) return "redirect:" + "/dashboard";
-			else return "redirect:" + "/settings";*/
+			if(form.getUsername().equalsIgnoreCase("CEO")) return "redirect:" + "/dashboard";
+			else return "redirect:" + "/settings";
 			
 			return (form.getUsername().equalsIgnoreCase("CEO")) ? "redirect:" + "/dashboard" : "redirect:" + "/settings";
 		}
@@ -69,5 +89,5 @@ public class LoginController {
 		model.addAttribute("infomessage", "Please login again to continue!");
 		return getLoginForm(req, res, model);
 		//return new ModelAndView("login","command",new LoginForm());	
-	}
+	}*/
 }

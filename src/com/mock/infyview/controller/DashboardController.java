@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.util.RedirectUrlBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +37,28 @@ public class DashboardController {
 	@RequestMapping(value="/dashboard", method=RequestMethod.GET)
 	public ModelAndView getDashboard(HttpServletRequest req, HttpServletResponse res){
 		
-		//make call to hpcc based on values saved in UserObj
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String loggedInUserName = auth.getName();
+		
+		if(loggedInUserName.equalsIgnoreCase("DM") 
+				|| loggedInUserName.equalsIgnoreCase("UnitHead")){
+			return new ModelAndView("redirect:" + "/settings");
+		}
+		
 		UserObject uo = SessionObjectsInterface.getFromSession(req, res);
+		//Coming from pring security authentication
+		if (uo==null){
+			uo = new UserObject();
+			uo.setAcesslevel(loggedInUserName);
+			SessionObjectsInterface.saveToSession(req, res, uo);
+		}
+		//redirecting to settings page in case of DM/UnitHead has logged in
+		if (uo.getAcesslevel().equalsIgnoreCase("DM") || uo.getAcesslevel().equalsIgnoreCase("UnitHead")){
+			if(uo.getSelectedDCValue()==null || uo.getSelectedDUValue()==null || uo.getSelectedUnitDetails()==null){
+				return new ModelAndView("settings");
+			}
+			//Otherwise if DM/UnitHead is coming from settings page, then flow will continue
+		}
 		
 		if(uo.getAcesslevel().equalsIgnoreCase("CEO")){
         	roxieInput1="Yes";
@@ -50,20 +73,20 @@ public class DashboardController {
         
         HPCCRoxieServiceClientController hrsContrl= new HPCCRoxieServiceClientController();
         ArrayList<HPCCEmpPercentageBean> hpccBean = new ArrayList<HPCCEmpPercentageBean>();
-		try {
+		/*try {
 			hpccBean = hrsContrl.getEmployeeData(roxieInput1,roxieInput2,roxieInput3,roxieInput4,roxieInput5);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
         
-        String benchVal = getPercentDataFromHPCCBean(hpccBean,"bench");
+      /*  String benchVal = getPercentDataFromHPCCBean(hpccBean,"bench");
         String buffVal = getPercentDataFromHPCCBean(hpccBean,"buffer");
-        String prodVal = getPercentDataFromHPCCBean(hpccBean,"production");
+        String prodVal = getPercentDataFromHPCCBean(hpccBean,"production");*/
 		
-		/*String benchVal = "30";
+		String benchVal = "30";
 		String buffVal = "20";
-		String prodVal = "50";*/
+		String prodVal = "50";
 		
 		ModelAndView mv = new ModelAndView("dashboard");
 		mv.addObject("banchPercentVal", benchVal);

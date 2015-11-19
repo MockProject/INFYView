@@ -47,7 +47,7 @@
 				</ul>
 				<!--Right Align Logout-->
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="logout">Logout</a></li>
+					<li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
 				</ul>
 			</div>
 		</div>

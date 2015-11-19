@@ -1,4 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -7,8 +6,6 @@
 <html lang="en" class="no-js">
 
     <head>
-
-        <meta charset="utf-8">
         <title>INFYView Login</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
@@ -29,15 +26,36 @@
     </head>
 
     <body>
-
+		<c:url value="/j_spring_security_check" var="secure_url"/>
         <div class="page-container">
             <h1>INFYView</h1>
-            <form:form action="login" method="post" class="form_style">
-                <form:input type="text" path="username" class="username form_input_style" placeholder="Username"/>
-                <form:input type="password" path="password" class="password form_input_style" placeholder="Password"/>
+            <form:form action="${secure_url}" method="POST" class="form_style">
+                <form:input type="text" path="username" name="username" class="username form_input_style" placeholder="Username"/>
+                <form:input type="password" path="password" name="password" class="password form_input_style" placeholder="Password"/>
                 <button type="submit">Login</button> 
             </form:form>
-            
+            <%-- <form name='loginForm'
+		  action="<c:url value='j_spring_security_check' />" method='POST'>
+
+		  <table>
+			<tr>
+				<td>User:</td>
+				<td><input type='text' name='username' value=''></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type='password' name='password' /></td>
+			</tr>
+			<tr>
+				<td colspan='2'><input name="submit" type="submit"
+					value="submit" /></td>
+			</tr>
+		  </table>
+
+		  <input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+
+		</form> --%>
             <c:if test="${not empty errmessage}">
             	<div class="my-notify-error">${errmessage}</div>
             </c:if>

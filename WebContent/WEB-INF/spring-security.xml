@@ -1,0 +1,30 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<http auto-config="true">
+		<intercept-url pattern="/dashboard**" access="ROLE_DM" />
+		<form-login 
+		    login-page="/login" 
+		    default-target-url="/dashboard" 
+			authentication-failure-url="/login?error" 
+			username-parameter="username"
+			password-parameter="password" />
+		<logout logout-success-url="/login?logout" />
+	</http>
+		    <!-- login-processing-url="/postlogin" -->
+	<authentication-manager>
+	  <authentication-provider>
+	    <user-service>
+		<user name="CEO" password="Infosys1" authorities="ROLE_CEO" />
+		<user name="DM" password="Infosys2" authorities="ROLE_DM" />
+		<user name="UnitHead" password="Infosys3" authorities="ROLE_UnitHead" />
+	    </user-service>
+	  </authentication-provider>
+	</authentication-manager>
+
+</beans:beans>
