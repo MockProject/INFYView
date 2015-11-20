@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	
+<sec:authentication property="principal.username" var="loggedInUser"/>	
   <div class="bs-example">
     <div class="btn-group btn-group-justified">
         <a href="#" class="btn btn-danger btn-xl responsive-width" 
@@ -23,7 +23,9 @@
   </div>
   <div id="wrapper_div">
     <div id="left"><jsp:include page="/WEB-INF/jsp/geochart.jsp"/></div>
-    <div id="right"><jsp:include page="/WEB-INF/jsp/force_graph.jsp"></jsp:include></div>
+    <div id="right" style="display:${'DM'==loggedInUser?'none':''}">
+    	<jsp:include page="/WEB-INF/jsp/force_graph.jsp"></jsp:include>
+    </div>
  </div>
  <!-- Modal -->
   <div class="modal fade" id="modalValueBench" role="dialog">

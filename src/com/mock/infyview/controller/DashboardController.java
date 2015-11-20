@@ -55,12 +55,6 @@ public class DashboardController {
             role = (Set<GrantedAuthority>) userDetail.getAuthorities();
         }
 
-        // set the model attributes
-        //model.addAttribute("accountname", name);
-        //model.addAttribute("userRole", role);
-
-		
-		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String loggedInUserRole = auth.getName();
 		
 		UserObject uo = SessionObjectsInterface.getFromSession(req, res);
@@ -91,20 +85,20 @@ public class DashboardController {
         
         HPCCRoxieServiceClientController hrsContrl= new HPCCRoxieServiceClientController();
         ArrayList<HPCCEmpPercentageBean> hpccBean = new ArrayList<HPCCEmpPercentageBean>();
-		/*try {
+		try {
 			hpccBean = hrsContrl.getEmployeeData(roxieInput1,roxieInput2,roxieInput3,roxieInput4,roxieInput5);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
         
-      /*  String benchVal = getPercentDataFromHPCCBean(hpccBean,"bench");
+		String benchVal = getPercentDataFromHPCCBean(hpccBean,"bench");
         String buffVal = getPercentDataFromHPCCBean(hpccBean,"buffer");
-        String prodVal = getPercentDataFromHPCCBean(hpccBean,"production");*/
+        String prodVal = getPercentDataFromHPCCBean(hpccBean,"production");
 		
-		String benchVal = "30";
+		/*String benchVal = "30";
 		String buffVal = "20";
-		String prodVal = "50";
+		String prodVal = "50";*/
 		
 		ModelAndView mv = new ModelAndView("dashboard");
 		mv.addObject("banchPercentVal", benchVal);
