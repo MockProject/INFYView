@@ -1,4 +1,5 @@
 $(function () {
+	
 	$('#pie_container').highcharts({
 	        chart: {
 	            type: 'pie',

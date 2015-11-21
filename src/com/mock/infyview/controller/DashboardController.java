@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -72,6 +73,32 @@ public class DashboardController {
 			//Otherwise if DM/UnitHead is coming from settings page, then flow will continue
 		}
 		
+		ArrayList<HPCCEmpPercentageBean> hpccBean = getDataForEmployeeUtilisation(uo);
+        
+		String benchVal = getPercentDataFromHPCCBean(hpccBean,"bench");
+        String buffVal = getPercentDataFromHPCCBean(hpccBean,"buffer");
+        String prodVal = getPercentDataFromHPCCBean(hpccBean,"production");
+		
+		/*String benchVal = "30";
+		String buffVal = "20";
+		String prodVal = "50";*/
+		
+		ModelAndView mv = new ModelAndView("dashboard");
+		mv.addObject("banchPercentVal", benchVal);
+		mv.addObject("bufferPercentVal", buffVal);
+		mv.addObject("prodPercentVal", prodVal);
+		
+		mv.addObject("pieChartData", getPieChartData(uo));
+		
+		return mv;	
+	}
+
+	/**
+	 * @param uo
+	 * @return
+	 */
+	private ArrayList<HPCCEmpPercentageBean> getDataForEmployeeUtilisation(
+			UserObject uo) {
 		if(uo.getAcesslevel().equalsIgnoreCase("CEO")){
         	roxieInput1="Yes";
         }
@@ -91,25 +118,22 @@ public class DashboardController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
-		String benchVal = getPercentDataFromHPCCBean(hpccBean,"bench");
-        String buffVal = getPercentDataFromHPCCBean(hpccBean,"buffer");
-        String prodVal = getPercentDataFromHPCCBean(hpccBean,"production");
-		
-		/*String benchVal = "30";
-		String buffVal = "20";
-		String prodVal = "50";*/
-		
-		ModelAndView mv = new ModelAndView("dashboard");
-		mv.addObject("banchPercentVal", benchVal);
-		mv.addObject("bufferPercentVal", buffVal);
-		mv.addObject("prodPercentVal", prodVal);
-		return mv;	
+		return hpccBean;
 	}
 	
-	@RequestMapping(value="/piechart")
-	public String getPieChart(){
-		return "piechart";	
+	
+	private JSONObject getPieChartData(UserObject uo){
+		
+		JSONObject pieData = new JSONObject();
+		pieData.put("Firefox", 45.0);
+		pieData.put("IE", 26.8);
+		pieData.put("Chrome", 12.8);
+		pieData.put("Safari", 8.5);
+		pieData.put("Opera", 6.9);
+		System.out.println(pieData);
+		
+		return pieData;
+
 	}
 	
 	private String getPercentDataFromHPCCBean( ArrayList<HPCCEmpPercentageBean> hpccBean, String allocation){

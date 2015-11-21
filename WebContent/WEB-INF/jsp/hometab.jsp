@@ -7,6 +7,8 @@
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="<c:url value="/resource_bundle/css/hometabstyle.css"/>">
+	<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+	<script src="<c:url value="/resource_bundle/js/barchart.js"/>"></script>
 </head>
 <body>
 
@@ -38,7 +40,7 @@
           <h4 class="modal-title">ROLE WISE SPLIT OF EMPLOYEES ON BENCH</h4>
         </div>
         <div class="modal-body">
-          <%-- <jsp:include page="/WEB-INF/jsp/piechart.jsp"> --%>
+          <div id="barchart_container" style="width:justify; height: 400px; margin: 0 auto"></div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>

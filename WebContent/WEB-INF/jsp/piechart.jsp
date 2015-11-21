@@ -8,7 +8,8 @@
 	<script src="<c:url value="/resource_bundle/js/piechart.js"/>"></script>
 	<script src="<c:url value="/resource_bundle/js/piecharts_theme_Sand_Signica.js"/>"></script>
 </head>
-<body>	
+<body>
+	<input id ="pieHiddenData" type="hidden" value="${pieChartData}"/>	
 	<div id="pie_container" align="center" style="height: 400px"></div>
 </body>
 </html>

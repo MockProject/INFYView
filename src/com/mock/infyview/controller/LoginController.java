@@ -36,7 +36,7 @@ public class LoginController {
 				}
 
 				if (logout != null) {
-					model.addObject("successmessage", "You've been logged out successfully.");
+					model.addObject("successmessage", "You've been logged out successfully");
 					model.addObject("infomessage", "Please login again to continue");
 				}
 				model.addObject("command", new LoginForm());

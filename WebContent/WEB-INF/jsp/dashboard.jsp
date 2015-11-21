@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -51,7 +50,7 @@
 				</ul>
 			</div>
 		</div>
-		<br/><br/>
+		
 		<div id="myTabContent" class="tab-content">
 			<div class="tab-pane fade active in" id="home">
 				<jsp:include page="/WEB-INF/jsp/hometab.jsp"></jsp:include>
