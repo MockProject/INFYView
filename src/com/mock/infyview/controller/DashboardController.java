@@ -10,13 +10,15 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
+//import org.json.JSONString;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.util.RedirectUrlBuilder;
+//import org.springframework.security.web.util.RedirectUrlBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -122,17 +124,32 @@ public class DashboardController {
 	}
 	
 	
-	private JSONObject getPieChartData(UserObject uo){
+	private String getPieChartData(UserObject uo){
 		
-		JSONObject pieData = new JSONObject();
-		pieData.put("Firefox", 45.0);
-		pieData.put("IE", 26.8);
-		pieData.put("Chrome", 12.8);
-		pieData.put("Safari", 8.5);
-		pieData.put("Opera", 6.9);
-		System.out.println(pieData);
+		/*JSONArray pieArr = new JSONArray();
+
+		JSONObject pieData1 = new JSONObject();
+		JSONObject pieData2 = new JSONObject();
+		JSONObject pieData3 = new JSONObject();
+		JSONObject pieData4 = new JSONObject();
+		JSONObject pieData5 = new JSONObject();
 		
-		return pieData;
+		pieData1.put("name","IE");pieData1.put("y",45.0);
+		pieData2.put("name","Firefox");pieData2.put("y",26.8);
+		pieData3.put("name","Chrome");pieData3.put("y",12.8);
+		pieData4.put("name","Safari");pieData4.put("y",8.5);
+		pieData5.put("name","Opera");pieData5.put("y",6.9);
+		
+		pieArr.put(pieData1);
+		pieArr.put(pieData2);
+		pieArr.put(pieData3);
+		pieArr.put(pieData4);
+		pieArr.put(pieData5);
+		
+		System.out.println(pieArr);
+		String pieStringData = pieArr.toString();*/
+		
+		return "{\"name\":\"IE\",\"y\":45},{\"name\":\"Firefox\",\"y\":26.8},{\"name\":\"Chrome\",\"y\":12.8},{\"name\":\"Safari\",\"y\":8.5},{\"name\":\"Opera\",\"y\":6.9}";
 
 	}
 	
