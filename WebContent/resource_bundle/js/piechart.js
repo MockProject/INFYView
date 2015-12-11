@@ -1,14 +1,14 @@
 
 $(function () {
 	//var unformattedChartData = [{"name":"IE","y":45},{"name":"Firefox","y":26.8},{"name":"Chrome","y":12.8},{"name":"Safari","y":8.5},{"name":"Opera","y":6.9}];
-	var unformattedChartData = document.getElementById('pieHiddenData').value;
-	
-	
+	var tmpData = document.getElementById('pieHiddenData').value;
+	var unformattedChartData = JSON.parse(tmpData);
+	window.alert(unformattedChartData);
 	var chartData = $.map(unformattedChartData, function(obj, i) {
 	    return [[obj.name, obj.y]];
 	});
 	
-	//window.alert(JSON.stringify(chartData));
+	window.alert(JSON.stringify(chartData));
 	
 	$('#pie_container').highcharts({
 	        chart: {
