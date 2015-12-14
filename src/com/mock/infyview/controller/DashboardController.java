@@ -149,7 +149,7 @@ public class DashboardController {
 		System.out.println(pieArr);
 		String pieStringData = pieArr.toString();*/
 		
-		return "{\"name\":\"IE\",\"y\":45},{\"name\":\"Firefox\",\"y\":26.8},{\"name\":\"Chrome\",\"y\":12.8},{\"name\":\"Safari\",\"y\":8.5},{\"name\":\"Opera\",\"y\":6.9}";
+		return "[{&quot;name&quot;:&quot;IE&quot;,&quot;y&quot;:40},{&quot;name&quot;:&quot;Firefox&quot;,&quot;y&quot;:26.8},{&quot;name&quot;:&quot;Chrome&quot;,&quot;y&quot;:14.8},{&quot;name&quot;:&quot;Safari&quot;,&quot;y&quot;:8.5},{&quot;name&quot;:&quot;Opera&quot;,&quot;y&quot;:9.9}]";
 
 	}
 	
